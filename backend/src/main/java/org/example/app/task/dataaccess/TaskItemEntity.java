@@ -18,8 +18,10 @@ public class TaskItemEntity extends ApplicationPersistenceEntity {
 
   }
 
-  public TaskItemEntity(String title, LocalDateTime deadline) {
+  public TaskItemEntity(String title, boolean completed, boolean starred, LocalDateTime deadline) {
     this.title = title;
+    this.completed = completed;
+    this.starred = starred;
     this.deadline = deadline;
   }
 

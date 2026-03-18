@@ -32,6 +32,14 @@ public class TaskListEntity extends ApplicationPersistenceEntity {
     this.title = title;
   }
 
+  public List<TaskItemEntity> getItems() {
+    return items;
+  }
+
+  public void setItems(List<TaskItemEntity> items) {
+    this.items = items;
+  }
+
   @OneToMany(mappedBy = "taskList", fetch = FetchType.LAZY)
   public List<TaskItemEntity> items;
 }
