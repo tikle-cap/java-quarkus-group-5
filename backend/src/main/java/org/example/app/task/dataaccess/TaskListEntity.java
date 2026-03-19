@@ -8,10 +8,11 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 import org.example.app.general.dataaccess.ApplicationPersistenceEntity;
+import org.example.app.task.common.TaskList;
 
 @Entity
 @Table(name = "TASK_LIST")
-public class TaskListEntity extends ApplicationPersistenceEntity {
+public class TaskListEntity extends ApplicationPersistenceEntity implements TaskList {
 
   @Column(name = "TITLE")
   private String title;
@@ -24,10 +25,12 @@ public class TaskListEntity extends ApplicationPersistenceEntity {
     this.title = title;
   }
 
+  @Override
   public String getTitle() {
     return title;
   }
 
+  @Override
   public void setTitle(String title) {
     this.title = title;
   }

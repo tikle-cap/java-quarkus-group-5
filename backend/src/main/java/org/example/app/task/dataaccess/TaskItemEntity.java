@@ -9,10 +9,11 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 import org.example.app.general.dataaccess.ApplicationPersistenceEntity;
+import org.example.app.task.common.TaskItem;
 
 @Entity
 @Table(name = "TASK_ITEM")
-public class TaskItemEntity extends ApplicationPersistenceEntity {
+public class TaskItemEntity extends ApplicationPersistenceEntity implements TaskItem {
 
   protected TaskItemEntity() {
 
@@ -42,35 +43,65 @@ public class TaskItemEntity extends ApplicationPersistenceEntity {
   public TaskListEntity taskList;
 
 
+  @Override
   public String getTitle() {
     return title;
   }
 
+  @Override
   public void setTitle(String title) {
     this.title = title;
   }
 
+  @Override
   public boolean isCompleted() {
     return completed;
   }
 
+  @Override
   public void setCompleted(boolean completed) {
     this.completed = completed;
   }
 
+  @Override
   public boolean isStarred() {
     return starred;
   }
 
+  @Override
   public void setStarred(boolean starred) {
     this.starred = starred;
   }
 
+  @Override
   public LocalDateTime getDeadline() {
     return deadline;
   }
 
+  @Override
   public void setDeadline(LocalDateTime deadline) {
     this.deadline = deadline;
+  }
+
+  @Override
+  public Long getTaskListId() {
+
+    if (this.taskList == null) {
+      return null;
+    }
+    return this.taskList.getId();
+  }
+
+  @Override
+  public void setTaskListId(Long taskListId) {
+
+    if (taskListId == null) {
+      this.taskList = null;
+    } else {
+      TaskListEntity taskListEntity = new TaskListEntity();
+      taskListEntity.setId(taskListId);
+      taskListEntity.setVersion(Integer.valueOf(0));
+      this.taskList = taskListEntity;
+    }
   }
 }
